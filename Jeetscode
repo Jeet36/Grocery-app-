@@ -1,0 +1,33 @@
+class GroceryItem:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+class GroceryStore:
+    def __init__(self):
+        self.inventory = []
+
+    def add_item(self, item):
+        self.inventory.append(item)
+
+    def remove_item(self, item):
+        self.inventory.remove(item)
+
+    def get_total_price(self):
+        total_price = 0
+        for item in self.inventory:
+            total_price += item.price
+        return total_price
+
+# Example usage
+store = GroceryStore()
+
+item1 = GroceryItem("Apple", 160)
+item2 = GroceryItem("Banana", 60)
+item3 = GroceryItem("Orange", 100)
+
+store.add_item(item1)
+store.add_item(item2)
+store.add_item(item3)
+
+print("Total price:", store.get_total_price())
