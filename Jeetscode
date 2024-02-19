@@ -31,3 +31,4 @@ store.add_item(item2)
 store.add_item(item3)
 
 print("Total price:", store.get_total_price())
+
