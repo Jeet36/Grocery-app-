@@ -1,0 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+
+def join_google_meet(url, meeting_code):
+    # Set up Selenium WebDriver (make sure to install the appropriate WebDriver for your browser)
+    driver = webdriver.Chrome()  # You can use any other WebDriver like Firefox, Safari, etc.
+
+    # Open Google Meet URL
+    driver.get(url)
+    time.sleep(2)  # Add a delay to allow the page to load
+
+    # Click on the "Join or start a meeting" button
+    join_button = driver.find_element_by_xpath("//div[@class='NPEfkd']/div[2]/div/div[2]/div/div/div/span/span")
+    join_button.click()
+    time.sleep(2)
+
+    # Enter the meeting code and join
+    code_input = driver.find_element_by_xpath("//input[@class='VfPpkd-RLmnJb']")
+    code_input.send_keys(meeting_code)
+    code_input.send_keys(Keys.ENTER)
+
+    # Allow camera and microphone access if prompted
+    time.sleep(5)  # Adjust the delay based on your internet speed
+
+    # Find and click the "Join now" button
+    join_now_button = driver.find_element_by_xpath("//div[@class='sUZ4id']/div/span/span")
+    join_now_button.click()
+
+    # Close the browser after joining the meeting
+    # Note: You may want to comment out this line during testing to observe the browser behavior
+    # driver.quit()
+
+if __name__ == "__main__":
+    google_meet_url = "https://meet.google.com/"
+    meeting_code = input("Enter the meeting code: ")
+    join_google_meet(google_meet_url, meeting_code)
